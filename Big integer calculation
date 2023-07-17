@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+char digitToChar(int d){
+	return d + '0';
+}
+
+int charToDigit(char ch)
+{
+	return ch-'0';  // char to digit ASCI exp:char {'5'- '0'} asci (45-40) =return --5 is int
+
+}
+
+string addnumbers(string n1, string n2)
+{
+	// make n2 is larger 
+
+	if (n1.length()> n2.length())
+	{
+		swap(n1,n2);
+	}
+	// Result 
+	string result ="";
+
+	// left to right adding 
+	// n1, n2 need reverse 
+
+	reverse(n1.begin(),n1.end());
+	reverse (n2.begin(),n2.end());
+
+	// Add digit upto n1.lenght()
+	int carry=0;
+
+	for(int i=0 ; i< n1.length();i++)
+	{
+		int d1=charToDigit(n1[i]);
+		int d2 = charToDigit(n2[ni]);
+
+		//addition 
+
+		int sum =d1 + d2 + carry;
+
+		int output_digit =sum % 10 ;
+
+		// carry 
+		carry =sum/ 10;
+
+		result.push_back(digitToChar(output_digit) );
+
+	}
+// after completing n1 then we have to add carry in n2 digit 
+	for (int i=n1.length();i<n2.length();i++)
+	{
+		int d2= charToDigit(n2[i]);
+		int sum =d2+carry;
+		int output_digit=sum%10;
+		carry =sum/10;
+		result.push_back(digitToChar(output_digit));
+	}
+
+	//finally if a carry is generated 
+	if (carry)
+	{
+		result.push_back('1'); //large value of carry is 1 
+	}
+
+
+	//reverse the final result
+
+	reverse(result.begin(),result.end());
+	return result;
+
+
+
+
+}
+	
+int main(){
+
+
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt","w",stdout);
+#endif
+
+	// string 
+	string s1, s2;
+	cin>>s1>>s2;
+
+	string result =addnumbers(s1,s2);
+	cout<<result <<endl;
+
+
+
+
+}
